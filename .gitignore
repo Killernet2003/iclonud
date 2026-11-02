@@ -1,0 +1,12 @@
+# Compilados y archivos locales
+*.apk
+*.aab
+*.keystore
+*.jks
+llave.properties
+credenciales.env
+__pycache__/
+.venv/
+# El lanzador web vive en su propio repositorio (Killernet2003/accesos-icloud)
+web/
+web-qr-instalar.png

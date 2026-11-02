@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iClonud · iCloud en Android y en Claude Code</title>
+<meta name="description" content="App de Android gratuita y de código abierto para tu correo, calendario y contactos de iCloud, más un servidor MCP para Claude Code. Solo protocolos abiertos, sin servidores intermedios.">
+<meta property="og:title" content="iClonud · iCloud en Android y en Claude Code">
+<meta property="og:description" content="Correo, calendario y contactos de iCloud en Android, gratis y de código abierto. Incluye servidor MCP para Claude Code.">
+<meta property="og:image" content="https://killernet2003.github.io/iclonud/captura-acceso.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b1d33">
+<link rel="icon" href="icono.png">
+<style>
+  :root {
+    --tinta: #0b1d33; --papel: #f4f1ea; --acento: #ff6a3d; --azul: #2f6fed;
+    --suave: #5b6675; --linea: #d9d3c7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--papel); color: var(--tinta);
+    font: 17px/1.6 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  }
+  .sans { font-family: ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
+  a { color: var(--azul); }
+  header.hero { background: var(--tinta); color: var(--papel); padding: 72px 24px 0; overflow: hidden; }
+  .ancho { max-width: 1040px; margin: 0 auto; }
+  .marca { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .02em; }
+  .marca img { width: 40px; height: 40px; border-radius: 10px; }
+  h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); line-height: 1.05; margin: 28px 0 18px; font-weight: 600; max-width: 14ch; }
+  h1 em { color: var(--acento); font-style: italic; }
+  .bajada { font-size: 1.2rem; max-width: 46ch; color: #c9d3df; margin: 0 0 32px; }
+  .botones { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px;
+    font-weight: 600; text-decoration: none; transition: transform .15s ease, background-color .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn.primario { background: var(--acento); color: #1b0d07; }
+  .btn.primario:hover { background: #ff825c; }
+  .btn.secundario { color: var(--papel); border: 1px solid #3a4d66; }
+  .btn.secundario:hover { background: #13283f; }
+  .captura { display: block; width: 100%; max-width: 880px; margin: 0 auto -6px; border-radius: 14px 14px 0 0;
+             box-shadow: 0 -10px 60px rgba(0,0,0,.35); }
+  section { padding: 72px 24px; border-bottom: 1px solid var(--linea); }
+  h2 { font-size: 2rem; margin: 0 0 10px; font-weight: 600; }
+  .antetitulo { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; color: var(--acento); font-weight: 700; }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-top: 32px; }
+  .rejilla h3 { margin: 0 0 6px; font-size: 1.15rem; }
+  .rejilla p { margin: 0; color: var(--suave); }
+  .num { font-size: 2.4rem; color: var(--acento); line-height: 1; margin-bottom: 8px; font-style: italic; }
+  pre { background: var(--tinta); color: #e8eef5; padding: 18px 20px; border-radius: 12px; overflow-x: auto;
+        font: 14px/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 760px) { .dos { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  td, th { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--linea); }
+  th { color: var(--suave); font-weight: 600; }
+  .no { color: #a33b20; }
+  footer { padding: 40px 24px 56px; color: var(--suave); font-size: .9rem; }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="ancho">
+    <div class="marca sans"><img src="icono.png" alt="" width="40" height="40">iClonud</div>
+    <h1>Tu iCloud, <em>fuera</em> del iPhone.</h1>
+    <p class="bajada">Correo, calendario y contactos de iCloud en Android y en Claude Code. Gratis, de código abierto y sin servidores intermedios.</p>
+    <div class="botones sans">
+      <a class="btn primario" href="https://github.com/Killernet2003/iclonud/releases/latest">Descargar APK</a>
+      <a class="btn secundario" href="#mcp">Usar con Claude Code</a>
+      <a class="btn secundario" href="https://github.com/Killernet2003/iclonud">Ver el código</a>
+    </div>
+  </div>
+  <img class="captura" src="captura-acceso.webp" alt="Pantalla de acceso de iClonud en una tablet Android" width="1200" height="678">
+</header>
+
+<section>
+  <div class="ancho">
+    <div class="antetitulo sans">Qué hace</div>
+    <h2>Lo que iCloud permite, bien hecho.</h2>
+    <div class="rejilla">
+      <div><div class="num">01</div><h3>Correo</h3><p>Lee tu bandeja, busca y envía desde tu dirección de iCloud, por IMAP y SMTP.</p></div>
+      <div><div class="num">02</div><h3>Calendario</h3><p>Consulta y crea eventos en todos tus calendarios de iCloud, por CalDAV.</p></div>
+      <div><div class="num">03</div><h3>Contactos</h3><p>Busca y agrega contactos sincronizados con tu iPhone y tu Mac, por CardDAV.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="mcp">
+  <div class="ancho dos">
+    <div>
+      <div class="antetitulo sans">Para Claude Code</div>
+      <h2>Tu iCloud como herramienta de Claude.</h2>
+      <p>El servidor MCP de iClonud le da a Claude Code 11 herramientas: buscar y leer correos, crear borradores, revisar tu agenda, crear eventos y buscar contactos. Pídele <em>«resume mis correos sin leer de iCloud»</em> o <em>«¿qué tengo el jueves?»</em>.</p>
+      <p>Enviar un correo siempre pasa por tu confirmación.</p>
+    </div>
+    <div>
+<pre>git clone https://github.com/Killernet2003/iclonud.git
+claude mcp add --scope user icloud -- \
+  uv run --quiet --script "$PWD/iclonud/mcp/icloud_mcp.py"</pre>
+      <p class="sans" style="font-size:.92rem;color:var(--suave)">Luego escribe tu Apple ID y una contraseña específica de app en <code>~/.config/iclonud-mcp/credenciales.env</code>. <a href="https://github.com/Killernet2003/iclonud/tree/main/mcp">Guía completa</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="ancho dos">
+    <div>
+      <div class="antetitulo sans">Privacidad</div>
+      <h2>Tus datos van de Apple a ti. Nada más.</h2>
+      <p>iClonud se conecta solo a los servidores de Apple, por TLS. No hay backend propio, ni analítica, ni cuentas nuevas.</p>
+      <p>Usas una <strong>contraseña específica de app</strong>, el método oficial de Apple para clientes externos: tu contraseña principal nunca se escribe en la app y puedes revocar el acceso en un clic desde <a href="https://account.apple.com">account.apple.com</a>.</p>
+    </div>
+    <div>
+      <table class="sans">
+        <tr><th>Servicio</th><th>¿Incluido?</th></tr>
+        <tr><td>Correo</td><td>Sí · IMAP/SMTP</td></tr>
+        <tr><td>Calendario</td><td>Sí · CalDAV</td></tr>
+        <tr><td>Contactos</td><td>Sí · CardDAV</td></tr>
+        <tr><td>Fotos, Drive, Notas, Recordatorios, Buscar</td><td class="no">No: Apple no ofrece protocolo abierto</td></tr>
+      </table>
+      <p class="sans" style="font-size:.92rem;color:var(--suave)">Para esos servicios, usa <a href="https://killernet2003.github.io/accesos-icloud/">Accesos iCloud</a>, nuestro lanzador web de iCloud.com.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="ancho">
+    <div class="antetitulo sans">Empieza en 3 pasos</div>
+    <h2>Instalar la app</h2>
+    <div class="rejilla">
+      <div><div class="num">1</div><h3>Descarga</h3><p>Baja el APK desde <a href="https://github.com/Killernet2003/iclonud/releases/latest">Releases</a> en tu Android 8.0 o superior.</p></div>
+      <div><div class="num">2</div><h3>Crea la contraseña</h3><p>En account.apple.com → Inicio de sesión y seguridad → Contraseñas específicas de app.</p></div>
+      <div><div class="num">3</div><h3>Entra</h3><p>Escribe tu Apple ID y esa contraseña. Listo.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="sans">
+  <div class="ancho">
+    Código abierto con licencia MIT · <a href="https://github.com/Killernet2003/iclonud">GitHub</a><br>
+    iClonud es un proyecto independiente y no está afiliado, patrocinado ni aprobado por Apple Inc. iCloud es una marca de Apple Inc.
+  </div>
+</footer>
+</body>
+</html>

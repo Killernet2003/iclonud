@@ -1,0 +1,5 @@
+# Copia este archivo a ~/.config/iclonud-mcp/credenciales.env y dale permisos 600.
+# ICLOUD_APPLE_ID: tu Apple ID (correo de la cuenta).
+# ICLOUD_APP_PASSWORD: contraseña específica de app (account.apple.com), NO tu contraseña normal.
+ICLOUD_APPLE_ID=
+ICLOUD_APP_PASSWORD=
