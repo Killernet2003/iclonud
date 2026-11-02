@@ -42,7 +42,7 @@ fun LoginScreen(onLoggedIn: () -> Unit, vm: LoginViewModel = viewModel()) {
 
         OutlinedTextField(
             value = appleId, onValueChange = { appleId = it },
-            label = { Text("Apple ID (tu correo iCloud)") },
+            label = { Text("Apple ID (correo de tu cuenta de Apple)") },
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             modifier = Modifier.fillMaxWidth(),
@@ -50,7 +50,7 @@ fun LoginScreen(onLoggedIn: () -> Unit, vm: LoginViewModel = viewModel()) {
         Spacer(Modifier.height(12.dp))
         OutlinedTextField(
             value = pass, onValueChange = { pass = it },
-            label = { Text("Contraseña específica de app") },
+            label = { Text("Contraseña de aplicación") },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -58,13 +58,13 @@ fun LoginScreen(onLoggedIn: () -> Unit, vm: LoginViewModel = viewModel()) {
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            "Apple exige una contraseña específica de app para clientes externos. " +
+            "Apple exige una contraseña de aplicación para clientes externos. " +
                 "No se acepta tu contraseña normal del Apple ID.",
             style = MaterialTheme.typography.bodySmall,
         )
         TextButton(onClick = {
             ctx.startActivity(Intent(Intent.ACTION_VIEW, ICloudEndpoints.APP_PASSWORD_HELP.toUri()))
-        }) { Text("¿Cómo creo una? (appleid.apple.com)") }
+        }) { Text("¿Cómo creo una? (account.apple.com)") }
 
         Spacer(Modifier.height(8.dp))
         Button(

@@ -30,10 +30,17 @@ class MailViewModel : ViewModel() {
             try {
                 _state.value = _state.value.copy(loading = false, messages = r.inbox())
             } catch (e: Exception) {
-                _state.value = _state.value.copy(loading = false, error = e.message)
+                _state.value = _state.value.copy(loading = false, error = traducir(e.message))
             }
         }
     }
+
+    private fun traducir(msg: String?): String =
+        if (msg != null && (msg.contains("AUTHENTICATE", true) || msg.contains("Authentication", true)))
+            "iCloud no permite el acceso al correo con esta cuenta. Si el calendario y los contactos " +
+                "funcionan, tu Apple ID no tiene una dirección @icloud.com activa (iPhone: Ajustes → " +
+                "tu nombre → iCloud → Correo de iCloud)."
+        else msg ?: "No se pudo cargar el correo."
 
     fun openMessage(m: MailMessage) {
         val r = repo ?: return
