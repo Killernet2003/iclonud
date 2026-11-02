@@ -13,12 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.iclonud.bridge.model.Contact
 import com.iclonud.bridge.vm.ContactsViewModel
 
 @Composable
 fun ContactsScreen(modifier: Modifier = Modifier, vm: ContactsViewModel = viewModel()) {
     val state by vm.state.collectAsState()
     var adding by remember { mutableStateOf(false) }
+    var porBorrar by remember { mutableStateOf<Contact?>(null) }
     LaunchedEffect(Unit) { vm.refresh() }
 
     Box(modifier.fillMaxSize()) {
@@ -40,7 +42,7 @@ fun ContactsScreen(modifier: Modifier = Modifier, vm: ContactsViewModel = viewMo
                             }
                         },
                         trailingContent = {
-                            IconButton(onClick = { vm.delete(c) }) { Icon(Icons.Filled.Delete, "Eliminar") }
+                            IconButton(onClick = { porBorrar = c }) { Icon(Icons.Filled.Delete, "Eliminar") }
                         },
                     )
                     HorizontalDivider()
@@ -52,6 +54,20 @@ fun ContactsScreen(modifier: Modifier = Modifier, vm: ContactsViewModel = viewMo
         FloatingActionButton(onClick = { adding = true }, modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)) {
             Icon(Icons.Filled.Add, "Nuevo contacto")
         }
+    }
+
+    porBorrar?.let { x ->
+        AlertDialog(
+            onDismissRequest = { porBorrar = null },
+            title = { Text("¿Eliminar este contacto?") },
+            text = { Text("Se borrará «${x.fullName}» de iCloud y desaparecerá también de tu iPhone, iPad y Mac.") },
+            confirmButton = {
+                TextButton(onClick = { vm.delete(x); porBorrar = null }) {
+                    Text("Eliminar", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = { TextButton(onClick = { porBorrar = null }) { Text("Cancelar") } },
+        )
     }
 
     if (adding) NewContactDialog(

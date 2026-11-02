@@ -13,12 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.iclonud.bridge.model.CalEvent
 import com.iclonud.bridge.vm.CalendarViewModel
 
 @Composable
 fun CalendarScreen(modifier: Modifier = Modifier, vm: CalendarViewModel = viewModel()) {
     val state by vm.state.collectAsState()
     var adding by remember { mutableStateOf(false) }
+    var porBorrar by remember { mutableStateOf<CalEvent?>(null) }
     LaunchedEffect(Unit) { vm.refresh() }
 
     Box(modifier.fillMaxSize()) {
@@ -36,7 +38,7 @@ fun CalendarScreen(modifier: Modifier = Modifier, vm: CalendarViewModel = viewMo
                         overlineContent = { Text(if (e.allDay) fmtDay(e.startMillis) else fmtDateTime(e.startMillis)) },
                         supportingContent = { if (e.location.isNotBlank()) Text(e.location) },
                         trailingContent = {
-                            IconButton(onClick = { vm.delete(e) }) { Icon(Icons.Filled.Delete, "Eliminar") }
+                            IconButton(onClick = { porBorrar = e }) { Icon(Icons.Filled.Delete, "Eliminar") }
                         },
                     )
                     HorizontalDivider()
@@ -48,6 +50,20 @@ fun CalendarScreen(modifier: Modifier = Modifier, vm: CalendarViewModel = viewMo
         FloatingActionButton(onClick = { adding = true }, modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)) {
             Icon(Icons.Filled.Add, "Nuevo evento")
         }
+    }
+
+    porBorrar?.let { x ->
+        AlertDialog(
+            onDismissRequest = { porBorrar = null },
+            title = { Text("¿Eliminar este evento?") },
+            text = { Text("Se borrará «${x.summary}» de iCloud y desaparecerá también de tu iPhone, iPad y Mac.") },
+            confirmButton = {
+                TextButton(onClick = { vm.delete(x); porBorrar = null }) {
+                    Text("Eliminar", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = { TextButton(onClick = { porBorrar = null }) { Text("Cancelar") } },
+        )
     }
 
     if (adding) NewEventDialog(

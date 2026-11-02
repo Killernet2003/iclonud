@@ -13,7 +13,7 @@ iClonud tiene dos partes que usan los mismos servidores oficiales de iCloud:
 
 | | Qué es | Carpeta |
 |---|---|---|
-| 📱 **App de Android** | Kotlin + Jetpack Compose. Lee y envía correo, ve y crea eventos, ve y crea contactos. | [`android/`](android/) |
+| 📱 **App de Android** | Kotlin + Jetpack Compose. Correo, calendario y contactos nativos, y accesos a Notas, Fotos, iCloud Drive, Recordatorios y Buscar por iCloud.com. | [`android/`](android/) |
 | 🤖 **Servidor MCP** | Le da a Claude Code (o a cualquier cliente MCP) herramientas para tu correo, calendario y contactos de iCloud. | [`mcp/`](mcp/) |
 
 | Servicio | Protocolo | Servidor |
@@ -71,8 +71,9 @@ Ajustes → tu nombre → iCloud → Correo de iCloud). Si tu Apple ID es de otr
 Hotmail…) y nunca creaste esa dirección, el calendario y los contactos funcionan, pero el correo no.
 
 Apple **no ofrece protocolo abierto** para Fotos, iCloud Drive, Notas, Recordatorios ni Buscar.
-iClonud no los incluye y no usa APIs privadas ni técnicas de *scraping*. Para esos servicios,
-usa [Accesos iCloud](https://killernet2003.github.io/accesos-icloud/), un lanzador web de iCloud.com.
+iClonud no usa APIs privadas ni técnicas de *scraping*: la pestaña **iCloud** de la app los abre en
+iCloud.com, la web oficial de Apple, dentro de una pestaña segura de Chrome. Inicias sesión en la
+página de Apple y la app nunca ve esa contraseña.
 
 ## Compilar desde el código
 

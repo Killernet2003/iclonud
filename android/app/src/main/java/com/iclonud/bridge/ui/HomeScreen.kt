@@ -3,6 +3,7 @@ package com.iclonud.bridge.ui
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.People
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 
 private enum class Tab(val label: String, val icon: ImageVector) {
+    ICloud("iCloud", Icons.Filled.Cloud),
     Mail("Correo", Icons.Filled.Email),
     Calendar("Calendario", Icons.Filled.CalendarMonth),
     Contacts("Contactos", Icons.Filled.People),
@@ -20,7 +22,7 @@ private enum class Tab(val label: String, val icon: ImageVector) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(onLogout: () -> Unit) {
-    var tab by remember { mutableStateOf(Tab.Mail) }
+    var tab by remember { mutableStateOf(Tab.ICloud) }
 
     Scaffold(
         topBar = {
@@ -48,6 +50,7 @@ fun HomeScreen(onLogout: () -> Unit) {
     ) { padding ->
         val mod = Modifier.padding(padding)
         when (tab) {
+            Tab.ICloud -> ICloudWebScreen(mod)
             Tab.Mail -> MailScreen(mod)
             Tab.Calendar -> CalendarScreen(mod)
             Tab.Contacts -> ContactsScreen(mod)
