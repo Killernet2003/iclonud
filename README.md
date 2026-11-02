@@ -60,11 +60,15 @@ Luego escribe tus credenciales en `~/.config/iclonud-mcp/credenciales.env` (deta
 ## La contraseña específica de app
 
 1. Entra en [account.apple.com](https://account.apple.com) → *Inicio de sesión y seguridad* →
-   *Contraseñas específicas de app*. Requiere la verificación en dos pasos activada.
+   *Contraseñas de aplicaciones*. Requiere la verificación en dos pasos activada.
 2. Crea una, por ejemplo «iClonud». Apple te muestra algo como `abcd-efgh-ijkl-mnop`.
 3. Úsala en la app o en el archivo de credenciales del MCP.
 
 ## Límites honestos
+
+El **correo** solo funciona si tu cuenta tiene una dirección **@icloud.com** activa (en el iPhone:
+Ajustes → tu nombre → iCloud → Correo de iCloud). Si tu Apple ID es de otro dominio (Gmail,
+Hotmail…) y nunca creaste esa dirección, el calendario y los contactos funcionan, pero el correo no.
 
 Apple **no ofrece protocolo abierto** para Fotos, iCloud Drive, Notas, Recordatorios ni Buscar.
 iClonud no los incluye y no usa APIs privadas ni técnicas de *scraping*. Para esos servicios,

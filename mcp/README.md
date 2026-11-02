@@ -38,7 +38,7 @@ contactos de iCloud**, usando solo IMAP/SMTP, CalDAV y CardDAV. Es un único arc
    ```
 
    Escribe en él tu Apple ID y una **contraseña específica de app**
-   (account.apple.com → Inicio de sesión y seguridad → Contraseñas específicas de app).
+   (account.apple.com → Inicio de sesión y seguridad → Contraseñas de aplicaciones).
 
 4. Reinicia Claude Code o reconecta el servidor con `/mcp`.
 

@@ -77,7 +77,14 @@ def _credenciales() -> tuple[str, str]:
 def _imap() -> imaplib.IMAP4_SSL:
     apple_id, clave = _credenciales()
     m = imaplib.IMAP4_SSL(IMAP_HOST, IMAP_PORT, ssl_context=ssl.create_default_context(), timeout=45)
-    m.login(apple_id, clave)
+    try:
+        m.login(apple_id, clave)
+    except imaplib.IMAP4.error as e:
+        raise RuntimeError(
+            "iCloud rechazó el acceso al correo. Si el calendario y los contactos sí funcionan, la "
+            "contraseña está bien y lo más probable es que la cuenta no tenga una dirección @icloud.com "
+            "activa (iPhone: Ajustes → tu nombre → iCloud → Correo de iCloud)."
+        ) from e
     return m
 
 
